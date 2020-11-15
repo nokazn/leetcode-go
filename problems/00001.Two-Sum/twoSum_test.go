@@ -1,6 +1,7 @@
 package leetcode
 
 import (
+	"reflect"
 	"strconv"
 	"testing"
 )
@@ -42,7 +43,7 @@ func TestTwoSum(t *testing.T) {
 	for i, tt := range testData {
 		t.Run(strconv.Itoa(i), func(t *testing.T) {
 			res := twoSum(tt.in.nums, tt.in.target)
-			if tt.out[0] == res[0] && tt.out[1] == res[1] {
+			if reflect.DeepEqual(res, tt.out) {
 				t.Logf("[input]: %v  [output]: %v\n", tt.in, res)
 			} else {
 				t.Errorf("[input]: %v  [output]: %v  [expected]: %v", tt.in, res, tt.out)
