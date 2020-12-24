@@ -1,12 +1,5 @@
 package leetcode
 
-func max(x, y int) int {
-	if x > y {
-		return x
-	}
-	return y
-}
-
 func quotientWithRemainder(dividend, divisor int) int {
 	q := dividend / divisor
 	// 余りがある場合加算
@@ -17,8 +10,11 @@ func quotientWithRemainder(dividend, divisor int) int {
 }
 
 func convert(s string, numRows int) string {
-	// 最小値は 1
-	lengthInGroups := max((numRows-1)*2, 1)
+	if numRows == 1 {
+		return s
+	}
+
+	lengthInGroups := (numRows - 1) * 2
 	l := len(s)
 	numGroups := quotientWithRemainder(l, lengthInGroups)
 
