@@ -10,6 +10,7 @@ func myAtoi(s string) int {
 		sign int8
 	)
 
+F:
 	for _, v := range s {
 		switch {
 		case sign == 0 && v == ' ':
@@ -23,16 +24,15 @@ func myAtoi(s string) int {
 				sign = 1
 			}
 			num = num*10 + int(int8(v-'0')*sign)
-			if num < MinInt || MaxInt < num {
-				if sign < 0 {
-					num = MinInt
-				} else {
-					num = MaxInt
-				}
-				return num
+			if num < MinInt {
+				num = MinInt
+				break F
+			} else if num > MaxInt {
+				num = MaxInt
+				break F
 			}
 		default:
-			return num
+			break F
 		}
 	}
 
