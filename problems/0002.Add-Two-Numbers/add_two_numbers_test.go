@@ -3,8 +3,6 @@ package leetcode
 import (
 	"reflect"
 	"testing"
-
-	"github.com/nokazn/leetcode-go/transformer"
 )
 
 type in struct {
@@ -41,7 +39,7 @@ func TestAddTwoNumbers(t *testing.T) {
 
 	for _, tt := range testData {
 		t.Run("add two numbers", func(t *testing.T) {
-			res := addTwoNumbers(transformer.IntsToListNode(tt.l1), transformer.IntsToListNode(tt.l2))
+			res := addTwoNumbers(IntsToListNode(tt.l1), IntsToListNode(tt.l2))
 			ok := reflect.DeepEqual(res, tt.out)
 			if ok {
 				t.Logf("[input]: %v  [output]: %v", tt.in, res)
