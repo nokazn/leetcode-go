@@ -12,18 +12,27 @@ type in struct {
 
 type out []int
 
-func IntsToListNode(nums []int) *ListNode {
-	if len(nums) == 0 {
+func intsToListNode(ints []int) *ListNode {
+	if len(ints) == 0 {
 		return nil
 	}
 
 	root := &ListNode{}
 	current := root
-	for _, v := range nums {
+	for _, v := range ints {
 		current.Next = &ListNode{v, nil}
 		current = current.Next
 	}
 	return root.Next
+}
+
+func listNodeToInts(l *ListNode) []int {
+	var ints []int
+	for l != nil {
+		ints = append(ints, l.Val)
+		l = l.Next
+	}
+	return ints
 }
 
 func TestAddTwoNumbers(t *testing.T) {
@@ -39,8 +48,9 @@ func TestAddTwoNumbers(t *testing.T) {
 
 	for _, tt := range testData {
 		t.Run("add two numbers", func(t *testing.T) {
-			res := addTwoNumbers(IntsToListNode(tt.l1), IntsToListNode(tt.l2))
-			ok := reflect.DeepEqual(res, tt.out)
+			res := listNodeToInts(addTwoNumbers(intsToListNode(tt.l1), intsToListNode(tt.l2)))
+			// 型を揃えないと比較できない
+			ok := reflect.DeepEqual(res, []int(tt.out))
 			if ok {
 				t.Logf("[input]: %v  [output]: %v", tt.in, res)
 			} else {
